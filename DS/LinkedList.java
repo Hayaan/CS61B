@@ -6,7 +6,9 @@ public class LinkedList {
 			this.data = data;
 		}
 	}
-	
+
+    Node head;          // Pointer to the head of the singly linked list.
+
 	public void append(int data) {
 		if (head == null) {
             head = new Node(data);
