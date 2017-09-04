@@ -1,9 +1,5 @@
 public class LinkedList {
-<<<<<<< HEAD
 	class Node {
-=======
-	public class Node {
->>>>>>> 49ea9124b7be34b1fdd35a4bfc070290ac2aa201
 		Node next;
 		int data;
 		public Node(int data) {
