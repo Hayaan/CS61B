@@ -1,5 +1,6 @@
 public class LinkedList {
-	class Node {
+
+    class Node {
 		Node next;
 		int data;
 		public Node(int data) {
@@ -9,17 +10,17 @@ public class LinkedList {
 
     Node head;          // Pointer to the head of the singly linked list.
 
-	public void append(int data) {
-		if (head == null) {
+    public void append(int data) {
+        if (head == null) {
             head = new Node(data);
             return;
-		}
-		Node current = head;
+        }
+        Node current = head;
         while (current.next != null) {
             current = current.next;
         }
         current.next = new Node(data);
-	}
+    }
 
     public void prepend(int data) {
         Node newHead = new Node(data);
