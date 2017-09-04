@@ -1,5 +1,5 @@
 public class LinkedList {
-	public class Node {
+	class Node {
 		Node next;
 		int data;
 		public Node(int data) {
