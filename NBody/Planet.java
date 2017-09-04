@@ -1,4 +1,9 @@
 public class Planet {
+	double xP; double xV;
+	double yP; double yV;
+	double m;
+	String img;
+
 	public Planet(double xP, double yP, double xV, 
 		      double yV, double m, String img) {
 		this.xP = xP;
@@ -16,5 +21,9 @@ public class Planet {
                 this.m = p.m;
                 this.img = p.img;
 
+	}
+
+	public double calcDistance(Planet p) {
+		double result = Math.sqrt(Math.pow(p.xP-this.xP, 2) + Math.pow(p.xY) )
 	}
 }
