@@ -2,7 +2,7 @@ public class Dog {
 	private int age;
 	private String name;
 	
-	public void Dog(int age, String name) {
+	public Dog(int age, String name) {
 			this.name = name;
 			this.age = age;
 	}
