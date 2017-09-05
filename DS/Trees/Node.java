@@ -40,5 +40,36 @@ class Node {
             }
         }
     }
+
+    // In: Left, Root, Right. Pre: Root, Left, Right. Post: Left, Right, Root.
+
+    public void printInOrder() {            
+        if (left != null) {
+            left.printInOrder();
+        }    
+        System.out.println(data);
+        if (right != null) {
+            right.printInOrder();
+        }
+    }
+
+    public void printPreOrder() {           
+        System.out.println(data);
+        if (left != null) {
+            left.printPreOrder();
+        } if (right != null) {
+            right.printPreOrder();
+        }
+    }
+
+    public void printPostOrder() {
+        if (left != null) {
+            left.printPostOrder();       
+        } if ( right != null) {
+            right.printPostOrder();
+        }
+        System.out.println(data);
+    }
+
 }
 
