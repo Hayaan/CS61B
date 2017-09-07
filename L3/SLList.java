@@ -31,12 +31,19 @@ public class SLList {
       IntNode current = head;
       if (current.next == null) {
         current.next = new IntNode(x, null);
+<<<<<<< HEAD
       while (current.next != null) {
           current = current.next;
       }
       current.next = new IntNode(x, null);
     }
 }
+=======
+      } else {
+          current.next.addLast();
+      }
+    }
+>>>>>>> 83d17c42bafc534dfb64ad33e75021061bb0b528
 
     /** Returns the first item in a list */
     public int getFirst() {
