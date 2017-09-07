@@ -26,6 +26,16 @@ public class SLList {
         head = new IntNode(x, head);
     }
 
+    /** Appends x */
+    public void addLast(int x) {
+      IntNode current = head;
+      if (current.next == null) {
+        current.next = new IntNode(x, null);
+      } else {
+          current.next.addLast();
+      }
+    }
+
     /** Returns the first item in a list */
     public int getFirst() {
         return head.item;
