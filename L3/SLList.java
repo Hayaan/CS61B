@@ -1,15 +1,17 @@
 public class SLList {
+    // Prevents anything from outside the class from accessing the head.
+    // *Encapsulation*
+    private IntNode head;
+
     class IntNode {
         public int item;
         public IntNode next;
 
-        public IntNode(int item, IntNode next) {
+        public IntNode(int i, IntNode n) {
             this.item = item;
             this.next = next;
         }
     }
-
-    public IntNode head;
 
     public SLList(int x) {
         head = new IntNode(x, null);
@@ -32,4 +34,15 @@ public class SLList {
         L.addFirst(5);
         System.out.println(L.getFirst());        
     }
+
+    /* Something to watch out for is not using encapsulation to avoid ...
+     * encountering any problems, such as 
+     *
+     * SLList L = new SLList(15);
+     * L.addFirst(10);
+     * L.first.next.next = L.first.next;        
+     * 
+     * The node containing the item 15 ends up pointing to itself &
+     * thus messing up the list.
+     */
 }
