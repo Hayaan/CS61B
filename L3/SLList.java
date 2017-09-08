@@ -60,7 +60,7 @@ public class SLList {
     }
 
     /* Something to watch out for is not using encapsulation to avoid ...
-     * encountering any problems, such as
+     * encountering problems, such as
      *
      * SLList L = new SLList(15);
      * L.addFirst(10);
