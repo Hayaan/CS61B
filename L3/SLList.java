@@ -12,8 +12,8 @@ public class SLList {
         IntNode next;
 
         IntNode(int i, IntNode n) {
-            this.item = item;
-            this.next = next;
+            this.item = i;
+            this.next = n;
         }
     }
 
@@ -29,25 +29,23 @@ public class SLList {
     /** Appends x */
     public void addLast(int x) {
       IntNode current = head;
-      if (current.next == null) {
-        current.next = new IntNode(x, null);
-<<<<<<< HEAD
       while (current.next != null) {
           current = current.next;
       }
       current.next = new IntNode(x, null);
     }
-}
-=======
-      } else {
-          current.next.addLast();
-      }
-    }
->>>>>>> 83d17c42bafc534dfb64ad33e75021061bb0b528
 
     /** Returns the first item in a list */
     public int getFirst() {
         return head.item;
+    }
+
+    public int getLast() {
+        IntNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        return current.item;
     }
 
     public static void main(String[] args) {
@@ -56,6 +54,9 @@ public class SLList {
         L.addFirst(10);
         L.addFirst(5);
         System.out.println(L.getFirst());
+        System.out.println(L.getLast());
+        L.addLast(22);
+        System.out.println(L.getLast());
     }
 
     /* Something to watch out for is not using encapsulation to avoid ...
