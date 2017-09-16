@@ -49,14 +49,15 @@ public class SLList {
     }
 
     /** Returns the size of the LinkedList starting from the IntNode head.*/
-    public int size() {
-        int size = 0;
-        IntNode current = head;
-        while (current.next != null) {
-            size++;
-            current = current.next;
+    private static int size(IntNode p) {
+        if (p.next == null) {
+            return 1;
         }
-        return size;
+        return 1 + size(p.next);
+    }
+    
+    public int size() {
+        return size(head);
     }
 
     public static void main(String[] args) {
