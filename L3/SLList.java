@@ -48,6 +48,7 @@ public class SLList {
         return current.item;
     }
 
+    /** Returns the size of the LinkedList starting from the IntNode head.*/
     public int size() {
         int size = 0;
         IntNode current = head;
@@ -67,6 +68,7 @@ public class SLList {
         System.out.println(L.getLast());
         L.addLast(22);
         System.out.println(L.getLast());
+        System.out.println(L.size());
     }
 
     /* Something to watch out for is not using encapsulation to avoid ...
