@@ -3,6 +3,10 @@ public class SLList {
     // *Encapsulation*
     private IntNode head;
 
+    // Caches the size of the list, so that it doesn't have to be computed every time a user
+    // wants to know the size of the list.
+    private int size;
+
     // Nested class
     // Useful for when the class is 'dependent' on the main class.
     private static class IntNode {
@@ -19,20 +23,23 @@ public class SLList {
 
     public SLList(int x) {
         head = new IntNode(x, null);
+        size = 1;
     }
 
     /** Prepends x*/
     public void addFirst(int x) {
         head = new IntNode(x, head);
+        size ++;
     }
 
     /** Appends x */
     public void addLast(int x) {
-      IntNode current = head;
-      while (current.next != null) {
-          current = current.next;
-      }
-      current.next = new IntNode(x, null);
+        IntNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = new IntNode(x, null);
+        size++;
     }
 
     /** Returns the first item in a list */
@@ -48,16 +55,8 @@ public class SLList {
         return current.item;
     }
 
-    /** Returns the size of the LinkedList starting from the IntNode head.*/
-    private static int size(IntNode p) {
-        if (p.next == null) {
-            return 1;
-        }
-        return 1 + size(p.next);
-    }
-    
     public int size() {
-        return size(head);
+        return size;
     }
 
     public static void main(String[] args) {
