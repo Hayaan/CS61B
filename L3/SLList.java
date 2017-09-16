@@ -21,6 +21,12 @@ public class SLList {
         }
     }
 
+    /** Creates an empty SLList */
+    public SLList() {
+        head = null;
+        size = 0;
+    }
+
     public SLList(int x) {
         head = new IntNode(x, null);
         size = 1;
@@ -34,6 +40,9 @@ public class SLList {
 
     /** Appends x */
     public void addLast(int x) {
+        if (head == null) {
+            head = new IntNode(x, null);
+        }
         IntNode current = head;
         while (current.next != null) {
             current = current.next;
@@ -59,15 +68,24 @@ public class SLList {
         return size;
     }
 
+    public void print() {
+        IntNode current = head;
+        while (current != null) {
+            System.out.println(current.item);
+            current = current.next;
+        }
+    }
+
     public static void main(String[] args) {
         /* Creates a list of one integer, namely 10 */
         SLList L = new SLList(10);
         L.addFirst(10);
         L.addFirst(5);
-        System.out.println(L.getFirst());
-        System.out.println(L.getLast());
+        // System.out.println(L.getFirst());
+        // System.out.println(L.getLast());
         L.addLast(22);
-        System.out.println(L.getLast());
+        // System.out.println(L.getLast());
+        L.print();
         System.out.println(L.size());
     }
 
