@@ -48,6 +48,16 @@ public class SLList {
         return current.item;
     }
 
+    public int size() {
+        int size = 0;
+        IntNode current = head;
+        while (current.next != null) {
+            size++;
+            current = current.next;
+        }
+        return size;
+    }
+
     public static void main(String[] args) {
         /* Creates a list of one integer, namely 10 */
         SLList L = new SLList(10);
