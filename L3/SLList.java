@@ -1,7 +1,6 @@
 public class SLList {
-    // Prevents anything from outside the class from accessing the head.
-    // *Encapsulation*
-    private IntNode head;
+    /* The first item, if it exists, will be @ sentinel.next */
+    private IntNode sentinel;
 
     // Caches the size of the list, so that it doesn't have to be computed every time a user
     // wants to know the size of the list.
@@ -23,31 +22,26 @@ public class SLList {
 
     /** Creates an empty SLList */
     public SLList() {
-        head = null;
+        sentinel = new IntNode(63, null);   // any random #, we shouldn't be accesing it anyways.
         size = 0;
     }
 
     public SLList(int x) {
-        head = new IntNode(x, null);
+        sentinel =  new IntNode(63, null);
+        sentinel.next = new IntNode(x, null);
         size = 1;
     }
 
     /** Prepends x*/
     public void addFirst(int x) {
-        head = new IntNode(x, head);
+        sentinel.next = new IntNode(x, sentinel.next);
         size ++;
     }
 
     /** Appends x */
     public void addLast(int x) {
-        if (head == null) {
-            head = new IntNode(x, null);
-<<<<<<< HEAD
-            return;
-=======
->>>>>>> 566c058ad648ad6142825e349c3b22ee5c10eaa1
-        }
-        IntNode current = head;
+        IntNode current = sentinel;
+
         while (current.next != null) {
             current = current.next;
         }
@@ -57,11 +51,11 @@ public class SLList {
 
     /** Returns the first item in a list */
     public int getFirst() {
-        return head.item;
+        return sentinel.next.item;
     }
 
     public int getLast() {
-        IntNode current = head;
+        IntNode current = sentinel;
         while (current.next != null) {
             current = current.next;
         }
@@ -73,9 +67,9 @@ public class SLList {
     }
 
     public void print() {
-        IntNode current = head;
-        while (current != null) {
-            System.out.println(current.item);
+        IntNode current = sentinel;
+        while (current.next != null) {
+            System.out.println(current.next.item);
             current = current.next;
         }
     }
