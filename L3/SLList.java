@@ -42,7 +42,10 @@ public class SLList {
     public void addLast(int x) {
         if (head == null) {
             head = new IntNode(x, null);
+<<<<<<< HEAD
             return;
+=======
+>>>>>>> 566c058ad648ad6142825e349c3b22ee5c10eaa1
         }
         IntNode current = head;
         while (current.next != null) {
