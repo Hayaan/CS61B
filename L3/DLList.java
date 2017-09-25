@@ -9,28 +9,30 @@ public class DLList {
         IntNode next;
         IntNode prev;
         
-        public IntNode (int num, IntNode next, IntNode prev) {
+        public IntNode (int num) {
             this.data = num;
-            this.next = next;
-            this.prev = prev;
         }
     }
 
     public DLList () {
-         this.sentinel = new IntNode(-1, null, null);
+         this.sentinel = new IntNode(-1);
          this.size = 0;
     }
 
     public DLList (int num) {
-        this.sentinel = new IntNode(-1, null, null);
+        this.sentinel = new IntNode(-1);
         // Circular sentinel
-        sentinel.next = new IntNode(num, null, sentinel);
+        sentinel.next = new IntNode(num);
         sentinel.next.prev = sentinel;
         this.size = 1;
     }
 
     public void addFirst(int num) {
-        sentinel.next.prev = new IntNode(4, sentinel.next.next, sentinel);
+        IntNode newFirst = new IntNode(num);
+        newFirst.next = sentinel.next;
+        newFirst.prev = sentinel;
+        sentinel.next.prev = newFirst;
+        sentinel.next = newFirst;
         size++;
     }
     
@@ -57,5 +59,5 @@ public class DLList {
         list.addFirst(123);
         list.addLast(54);
         list.print();
-    }
+    }   
 }
