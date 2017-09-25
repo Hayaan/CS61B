@@ -28,16 +28,22 @@ public class DLList {
     }
 
     public void addFirst(int num) {
+        // Temporarily store the soon-to-be first IntNode in a variable, so the pointers can be correctly swapped around.
         IntNode newFirst = new IntNode(num);
         newFirst.next = sentinel.next;
         newFirst.prev = sentinel;
+        // Time to make the previous 1st node and the sentinel node point to the new 1st node, rather than each other.
         sentinel.next.prev = newFirst;
         sentinel.next = newFirst;
         size++;
     }
     
     public void addLast(int num) {
-        sentinel.prev = new IntNode(num, sentinel, sentinel.prev);
+        IntNode newLast = new IntNode(num);
+        newLast.next = sentinel;
+        newLast.prev = sentinel.prev;
+        sentinel.prev.next = newLast;
+        sentinel.prev = newLast;
         size++;
     }
        
