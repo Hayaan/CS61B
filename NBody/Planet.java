@@ -3,6 +3,7 @@ public class Planet {
     public String imgFileName;
 
     public Planet(double xxPos, double yyPos, double xxVel, double yyVel, double mass, String imgFileName) {
+        // Distances and mass are in meters and kilograms, respectively.
         this.xxPos = xxPos;
         this.yyPos = yyPos;
         this.xxVel = xxVel;
@@ -21,17 +22,23 @@ public class Planet {
         this.imgFileName = planet.imgFileName;
     }
 
-    public calcDistance(Planet otherPlanet) {
-        double deltaX = this.xxPos - otherPlanet.xxPos; 
+    public double calcDistance(Planet otherPlanet) {
+        double deltaX, deltaX_squared, deltaY, deltaY_squared, r_squared, r;
+        deltaX = this.xxPos - otherPlanet.xxPos; 
         deltaX_squared = deltaX*deltaX;
-        double deltaY = this.yyPos - otherPlanet.yyPos;
+        deltaY = this.yyPos - otherPlanet.yyPos;
         deltaY_squared = deltaY*deltaY;
 
-        double r_squared = deltaX_squared + deltaY_squared;
-        return Math.sqrt(r_squared);
+        r_squared = deltaX_squared + deltaY_squared;
+        r = Math.sqrt(r_squared);
+        return r;
+        @TODO: Make the method return a value that's capped @ 2 dec places
     }
 
     public static void main(String[] args) {
-        Planet Saturn = new Planet()
+        Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
+        Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
+
+        System.out.println(Saturn.calcDistance(Sun));
     }
 }
