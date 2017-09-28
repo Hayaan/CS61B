@@ -12,12 +12,12 @@ public class Planet {
     }
 
     public Planet(Planet planet) {
-        planet.xxPos = xxPos;
-        planet.yyPos = yyPos;
-        planet.xxVel = xxVel;
-        planet.yyVel = yyVel;
-        planet.mass = mass;
-        planet.imgFileName = imgFileName;
+        this.xxPos = planet.xxPos;
+        this.yyPos = planet.yyPos;
+        this.xxVel = planet.xxVel;
+        this.yyVel = planet.yyVel;
+        this.mass = planet.mass;
+        this.imgFileName = planet.imgFileName;
     }
 
 }
