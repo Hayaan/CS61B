@@ -25,7 +25,7 @@ public class Planet {
     // Calculates the distance between the 2 planets.
     public double calcDistance(Planet otherPlanet) {
         double deltaX, deltaX_squared, deltaY, deltaY_squared, r_squared, r;
-        deltaX = this.xxPos - otherPlanet.xxPos; 
+        deltaX = this.xxPos - otherPlanet.xxPos;
         deltaX_squared = deltaX*deltaX;
         deltaY = this.yyPos - otherPlanet.yyPos;
         deltaY_squared = deltaY*deltaY;
@@ -69,30 +69,37 @@ public class Planet {
         return yForce;
     }
 
-    public double[] calcNetForceExertedByX(Planet[] planets) {
-        double[] forces = new double[planets.length];
-        for (int i = 0; i < planets.length; i++) {
-            forces[i] = this.calcForceExertedByY(planets[i]);
+    public double calcNetForceExertedByX(Planet[] planets) {
+        double netForce = 0;
+        for (Planet planet : planets) {
+            netForce += this.calcForceExertedByX(planet);
         }
-        return forces;
+        return netForce;
     }
 
-    public double[] calcNetForceExertedByY(Planet[] planets) {
-        double[] forces = new double[planets.length];
-        for (int i = 0; i < planets.length; i++) {
-            forces[i] = this.calcForceExertedByY(planets[i]);
+    public double calcNetForceExertedByY(Planet[] planets) {
+        double netForce = 0;
+        for (Planet planet : planets) {
+            netForce += this.calcForceExertedByY(planet);
         }
-        return forces;
+        return netForce;
     }
 
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
         Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
+        Planet samh = new Planet(1, 0, 0, 0, 10, "");
+        Planet AEgir = new Planet(3, 3, 0, 0, 5, "");
+        Planet Rocinante = new Planet(5, -3, 0, 0, 50, "");
 
 
         System.out.println("The distance between Saturn and the Sun = " + Saturn.calcDistance(Sun) + " metres.");
         System.out.println("The force exerted on the Sun by Saturn = " + Saturn.calcForceExertedBy(Sun) + " metres.");
         System.out.println("The force exerted along the x-axis on the Sun by Saturn = " + Saturn.calcForceExertedByX(Sun) + " metres.");
         System.out.println("The force exerted along the y-axis on the Sun by Saturn = " + Saturn.calcForceExertedByY(Sun) + " metres.");
+        System.out.println(Sun.calcForceExertedByX(Saturn));
+        System.out.println(Sun.calcForceExertedByY(Saturn));
+        /** @TODO: The below statement returns a negative value, it should be positive. */
+        System.out.println(samh.calcForceExertedByX(Rocinante));
     }
 }
