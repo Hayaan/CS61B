@@ -39,18 +39,44 @@ public class Planet {
     public double calcForceExertedBy(Planet otherPlanet) {
         double G, gravForce, distance;
         G = 6.67e-11;
-        distance = this.calcDistance(otherPlanet);
+
         // F = G * m1 * m2  / r_squared
+        distance = this.calcDistance(otherPlanet);
         gravForce = (G*this.mass*otherPlanet.mass) / (distance*distance);
         return gravForce;
     }
 
+    // Force exerted onto the passed in Planet along the x-axis.
+    public double calcForceExertedByX(Planet otherPlanet) {
+        double force, xForce, distance, xDistance;
+        distance = this.calcDistance(otherPlanet);
+        xDistance = this.xxPos - otherPlanet.xxPos;
+        force = this.calcForceExertedBy(otherPlanet);
+
+        // Force x-axis = (Total force * delta X) / total distance
+        xForce = (force*xDistance) / distance;
+        return xForce;
+    }
+
+    public double calcForceExertedByY(Planet otherPlanet) {
+        double force, yForce, distance, yDistance;
+        distance = this.calcDistance(otherPlanet);
+        yDistance = this.yyPos - otherPlanet.yyPos;
+        force = this.calcForceExertedBy(otherPlanet);
+
+        // Force y-axis = (Total force * delta Y) / total distance
+        yForce = (force*yDistance) / distance;
+        return yForce;
+    }
 
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
         Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
 
-        System.out.println(Saturn.calcDistance(Sun));
-        System.out.println(Saturn.calcForceExertedBy(Sun));
+
+        System.out.println("The distance between Saturn and the Sun = " + Saturn.calcDistance(Sun) + " metres.");
+        System.out.println("The force exerted on the Sun by Saturn = " + Saturn.calcForceExertedBy(Sun) + " metres.");
+        System.out.println("The force exerted along the x-axis on the Sun by Saturn = " + Saturn.calcForceExertedByX(Sun) + " metres.");
+        System.out.println("The force exerted along the y-axis on the Sun by Saturn = " + Saturn.calcForceExertedByY(Sun) + " metres.");
     }
 }
