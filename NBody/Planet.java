@@ -34,12 +34,20 @@ public class Planet {
         return r;
     }
 
-    
+    public double calcForceExertedBy(Planet otherPlanet) {
+        double G, gravForce, distance;
+        G = 6.67e-11;
+        distance = this.calcDistance(otherPlanet);
+        gravForce = (G*this.mass*otherPlanet.mass) / (distance*distance);
+        return gravForce;
+    }
+
 
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
         Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
 
         System.out.println(Saturn.calcDistance(Sun));
+        System.out.println(Saturn.calcForceExertedBy(Sun));
     }
 }
