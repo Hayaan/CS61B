@@ -69,6 +69,22 @@ public class Planet {
         return yForce;
     }
 
+    public double[] calcNetForceExertedByX(Planet[] planets) {
+        double[] forces = new double[planets.length];
+        for (int i = 0; i < planets.length; i++) {
+            forces[i] = this.calcForceExertedByY(planets[i]);
+        }
+        return forces;
+    }
+
+    public double[] calcNetForceExertedByY(Planet[] planets) {
+        double[] forces = new double[planets.length];
+        for (int i = 0; i < planets.length; i++) {
+            forces[i] = this.calcForceExertedByY(planets[i]);
+        }
+        return forces;
+    }
+
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
         Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
