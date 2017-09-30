@@ -22,6 +22,7 @@ public class Planet {
         this.imgFileName = planet.imgFileName;
     }
 
+    // Calculates the distance between the 2 planets.
     public double calcDistance(Planet otherPlanet) {
         double deltaX, deltaX_squared, deltaY, deltaY_squared, r_squared, r;
         deltaX = this.xxPos - otherPlanet.xxPos; 
@@ -34,10 +35,12 @@ public class Planet {
         return r;
     }
 
+    // Calculates the gravitational exerted on the Planet passed in as an argument.
     public double calcForceExertedBy(Planet otherPlanet) {
         double G, gravForce, distance;
         G = 6.67e-11;
         distance = this.calcDistance(otherPlanet);
+        // F = G * m1 * m2  / r_squared
         gravForce = (G*this.mass*otherPlanet.mass) / (distance*distance);
         return gravForce;
     }
