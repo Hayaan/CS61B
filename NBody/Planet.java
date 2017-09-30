@@ -76,10 +76,7 @@ public class Planet {
 
         System.out.println("The distance between Saturn and the Sun = " + Saturn.calcDistance(Sun) + " metres.");
         System.out.println("The force exerted on the Sun by Saturn = " + Saturn.calcForceExertedBy(Sun) + " metres.");
-        System.out.println("The force exerted along the x-axis on the Sun by Saturn = " + Saturn.calcForceExertedByX(Sun) + " Newton.");
-        System.out.println("The force exerted along the y-axis on the Sun by Saturn = " + Saturn.calcForceExertedByY(Sun) + " Newton.");
-        System.out.println(Sun.calcDistance(Saturn));
-        System.out.println(Sun.calcForceExertedByX(Saturn));
-        System.out.println(Sun.calcForceExertedByY(Saturn));
+        System.out.println("The force exerted along the x-axis on the Sun by Saturn = " + Saturn.calcForceExertedByX(Sun) + " metres.");
+        System.out.println("The force exerted along the y-axis on the Sun by Saturn = " + Saturn.calcForceExertedByY(Sun) + " metres.");
     }
 }
