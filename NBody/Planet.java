@@ -32,8 +32,9 @@ public class Planet {
         r_squared = deltaX_squared + deltaY_squared;
         r = Math.sqrt(r_squared);
         return r;
-        @TODO: Make the method return a value that's capped @ 2 dec places
     }
+
+    
 
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
