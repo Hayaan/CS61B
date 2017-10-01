@@ -20,7 +20,7 @@ public class AList {
 
     /** Creates an empty arraylist */
     public AList() {
-        items = new int[100];
+        values = new int[100];
         size = 0;
     }
 
@@ -47,9 +47,8 @@ public class AList {
 
     /** Remove and return the last value in the arraylist */
     public int removeLast() {
-        int value = values[size-1];
-        values[size-1] = 0;
+        int last = getLast();
         size--;
-        return value;
+        return last;
     }
 }
