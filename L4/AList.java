@@ -14,8 +14,9 @@
         # of items in the arraylist should == size
 */
 public class AList {
-    int[] values;    
-    int size;
+    // These fields should've been private.
+    private int[] values;    
+    private int size;
 
     /** Creates an empty arraylist */
     public AList() {
