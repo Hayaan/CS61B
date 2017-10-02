@@ -31,7 +31,7 @@ public class AList {
     */
     public void addLast(int num) {
         if (size == values.length) 
-            {resize(size+1);}
+            {resize(2*size);}
         values[size] = num;
         size++;
     }
