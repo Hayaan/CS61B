@@ -15,34 +15,46 @@
 */
 public class AList {
     // These fields should've been private.
-    private int[] values;    
+    public int[] values;    
     private int size;
 
     /** Creates an empty arraylist */
     public AList() {
-        values = new int[100];
+        this.values = new int[4];
         size = 0;
     }
 
     /** Adds an integer to the back of the arraylist */
+/*  1 3 2 4 55 332 23 + 45
+    0 1 2 3 4 5 6  7
+    size = 8
+    1 3 2 4 55 332 23 45
+    0 1 2 3 4 5 6  7  8
+    size = 9
+*/
     public void addLast(int num) {
-        values[size] = num;
+        if (size == this.values.length) {
+            int[] newArr = new int[size+1];
+            System.arraycopy(values, 0, newArr, 0, values.length);
+            this.values = newArr;
+        }
+        this.values[size] = num;
         size++;
     }
 
     /** Returns the last value of the arraylist */
     public int getLast() {
-        return values[size-1];
+        return this.values[size-1];
     }
 
     /** Return value @ ith index in the array list. Zero-based */
     public int get(int i) {
-        return values[i];
+        return this.values[i];
     }
 
-    /** Return the size of the arraylist */
+    /** Return the this of the arraylist */
     public int size() {
-        return this.size;
+        return size;
     }
 
     /** Remove and return the last value in the arraylist */
@@ -50,5 +62,15 @@ public class AList {
         int last = getLast();
         size--;
         return last;
+    }
+
+    public static void main(String[] args) {
+        AList testList = new AList();
+        for (int i = 0; i < testList.values.length; i++) {
+        testList.addLast(i);
+        }
+        testList.addLast(234);
+        System.out.println(testList.size());
+        System.out.println(testList.removeLast());
     }
 }
