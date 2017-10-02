@@ -15,41 +15,41 @@
 */
 public class AList {
     // These fields should've been private.
-    public int[] values;    
+    private int[] values;    
     private int size;
 
     /** Creates an empty arraylist */
     public AList() {
-        this.values = new int[4];
+        values = new int[4];
         size = 0;
     }
 
-    /** Adds an integer to the back of the arraylist */
-/*  1 3 2 4 55 332 23 + 45
-    0 1 2 3 4 5 6  7
-    size = 8
-    1 3 2 4 55 332 23 45
-    0 1 2 3 4 5 6  7  8
-    size = 9
-*/
+    /** Adds an integer to the back of the arraylist 
+        If the array's max capacity has been reached,
+        copies all of the values to a new array whose capacity
+        is previous' array length + 1.
+    */
     public void addLast(int num) {
-        if (size == this.values.length) {
-            int[] newArr = new int[size+1];
-            System.arraycopy(values, 0, newArr, 0, values.length);
-            this.values = newArr;
-        }
-        this.values[size] = num;
+        if (size == values.length) 
+            {resize(size+1);}
+        values[size] = num;
         size++;
+    }
+    /** Resizes array to target capacity */
+    private void resize(int capacity) {
+        int[] newArr = new int[capacity];
+            System.arraycopy(values, 0, newArr, 0, size);
+            values = newArr;
     }
 
     /** Returns the last value of the arraylist */
     public int getLast() {
-        return this.values[size-1];
+        return values[size-1];
     }
 
     /** Return value @ ith index in the array list. Zero-based */
     public int get(int i) {
-        return this.values[i];
+        return values[i];
     }
 
     /** Return the this of the arraylist */
@@ -62,15 +62,5 @@ public class AList {
         int last = getLast();
         size--;
         return last;
-    }
-
-    public static void main(String[] args) {
-        AList testList = new AList();
-        for (int i = 0; i < testList.values.length; i++) {
-        testList.addLast(i);
-        }
-        testList.addLast(234);
-        System.out.println(testList.size());
-        System.out.println(testList.removeLast());
     }
 }
