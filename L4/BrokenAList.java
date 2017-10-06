@@ -15,8 +15,10 @@
 */
 public class AList {
     // These fields should've been private.
-    private int[] values;    
+    public int[] values;    
     private int size;
+    // Minimum usage ratio, if less than 1/4 of the array is in use, half it's capacity
+    private final double minUsage = 0.25;
 
     /** Creates an empty arraylist */
     public AList() {
@@ -30,16 +32,23 @@ public class AList {
         is previous' array length + 1.
     */
     public void addLast(int num) {
-        if (size == values.length) 
-            {resize(2*size);}
+        if (size == values.length) {
+            resize(2*size);
+            }
         values[size] = num;
         size++;
     }
     /** Resizes array to target capacity */
     private void resize(int capacity) {
-        int[] newArr = new int[capacity];
+        if (capacity < values.length) {
+            int[] newArr = new int[capacity];
+            System.arraycopy(values, 0, newArr, 0, capacity);
+            values = newArr;
+        } else { 
+            int[] newArr = new int[capacity];
             System.arraycopy(values, 0, newArr, 0, size);
             values = newArr;
+        }
     }
 
     /** Returns the last value of the arraylist */
@@ -59,8 +68,13 @@ public class AList {
 
     /** Remove and return the last value in the arraylist */
     public int removeLast() {
-        int last = getLast();
+        int last, capacity;
+        last = getLast();
         size--;
+        if (size/values.length <= minUsage) {
+            capacity = (int) (0.5*values.length);
+            resize(capacity);
+        }
         return last;
     }
 }
