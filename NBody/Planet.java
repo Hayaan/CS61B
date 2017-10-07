@@ -50,7 +50,7 @@ public class Planet {
     public double calcForceExertedByX(Planet otherPlanet) {
         double force, xForce, distance, xDistance;
         distance = this.calcDistance(otherPlanet);
-        xDistance = this.xxPos - otherPlanet.xxPos;
+        xDistance = otherPlanet.xxPos - this.xxPos;
         force = this.calcForceExertedBy(otherPlanet);
 
         // Force x-axis = (Total force * delta X) / total distance
@@ -61,7 +61,7 @@ public class Planet {
     public double calcForceExertedByY(Planet otherPlanet) {
         double force, yForce, distance, yDistance;
         distance = this.calcDistance(otherPlanet);
-        yDistance = this.yyPos - otherPlanet.yyPos;
+        yDistance = otherPlanet.yyPos - this.yyPos;
         force = this.calcForceExertedBy(otherPlanet);
 
         // Force y-axis = (Total force * delta Y) / total distance
@@ -100,6 +100,7 @@ public class Planet {
         System.out.println(Sun.calcForceExertedByX(Saturn));
         System.out.println(Sun.calcForceExertedByY(Saturn));
         /** @TODO: The below statement returns a negative value, it should be positive. */
+        System.out.println(samh.calcForceExertedBy(Rocinante));
         System.out.println(samh.calcForceExertedByX(Rocinante));
     }
 }
