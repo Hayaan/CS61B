@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
 public class Planet {
     public double xxPos, yyPos, xxVel, yyVel, mass;
     public String imgFileName;
@@ -48,6 +50,8 @@ public class Planet {
 
     // Force exerted onto the passed in Planet along the x-axis.
     public double calcForceExertedByX(Planet otherPlanet) {
+        if (this == otherPlanet) 
+            { return 0; }
         double force, xForce, distance, xDistance;
         distance = this.calcDistance(otherPlanet);
         xDistance = otherPlanet.xxPos - this.xxPos;
@@ -59,6 +63,8 @@ public class Planet {
     }
 
     public double calcForceExertedByY(Planet otherPlanet) {
+        if (this == otherPlanet) 
+            { return 0; }
         double force, yForce, distance, yDistance;
         distance = this.calcDistance(otherPlanet);
         yDistance = otherPlanet.yyPos - this.yyPos;
@@ -70,19 +76,20 @@ public class Planet {
     }
 
     public double calcNetForceExertedByX(Planet[] planets) {
-        double netForce = 0;
+        BigDecimal netForce = new BigDecimal("0.0");
         for (Planet planet : planets) {
-            netForce += this.calcForceExertedByX(planet);
+            // netForce = this.calcForceExertedByX(planet);
+            netForce = netForce.add(BigDecimal.valueOf(this.calcForceExertedByX(planet)));
         }
-        return netForce;
+        return netForce.doubleValue();
     }
 
     public double calcNetForceExertedByY(Planet[] planets) {
-        double netForce = 0;
+        BigDecimal netForce = new BigDecimal("0.0");
         for (Planet planet : planets) {
-            netForce += this.calcForceExertedByY(planet);
+            netForce = netForce.add(BigDecimal.valueOf(this.calcForceExertedByY(planet)));
         }
-        return netForce;
+        return netForce.doubleValue();
     }
 
     public static void main(String[] args) {
@@ -99,6 +106,7 @@ public class Planet {
         System.out.println("The force exerted along the y-axis on the Sun by Saturn = " + Saturn.calcForceExertedByY(Sun) + " metres.");
         System.out.println(Sun.calcForceExertedByX(Saturn));
         System.out.println(Sun.calcForceExertedByY(Saturn));
+        System.out.println(Sun.calcForceExertedByX(Sun));
         /** @TODO: The below statement returns a negative value, it should be positive. */
         System.out.println(samh.calcForceExertedBy(Rocinante));
         System.out.println(samh.calcForceExertedByX(Rocinante));
