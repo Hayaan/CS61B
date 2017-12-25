@@ -24,6 +24,18 @@ public class Planet {
         this.imgFileName = planet.imgFileName;
     }
 
+    public void update(double time, double fX, double fY) {
+        double dVelX, dVelY;
+        // F = a * m, thus a = F / m.
+
+        dVelX = (fX / this.mass) * time;
+        dVelY = (fY / this.mass) * time;
+
+        this.xxVel += dVelX;
+        this.yyVel += dVelY;
+    }
+
+
     // Calculates the distance between the 2 planets.
     public double calcDistance(Planet otherPlanet) {
         double deltaX, deltaX_squared, deltaY, deltaY_squared, r_squared, r;
@@ -99,6 +111,8 @@ public class Planet {
         Planet AEgir = new Planet(3, 3, 0, 0, 5, "");
         Planet Rocinante = new Planet(5, -3, 0, 0, 50, "");
 
+        Planet squirrel = new Planet(0, 0, 3, 5, 1, "");
+
 
         System.out.println("The distance between Saturn and the Sun = " + Saturn.calcDistance(Sun) + " metres.");
         System.out.println("The force exerted on the Sun by Saturn = " + Saturn.calcForceExertedBy(Sun) + " metres.");
@@ -110,5 +124,9 @@ public class Planet {
         /** @TODO: The below statement returns a negative value, it should be positive. */
         System.out.println(samh.calcForceExertedBy(Rocinante));
         System.out.println(samh.calcForceExertedByX(Rocinante));
+
+        System.out.println(squirrel.xxVel + " " + squirrel.yyVel);
+        squirrel.update(1, -5, -2);
+        System.out.println(squirrel.xxVel + " " + squirrel.yyVel);
     }
 }
