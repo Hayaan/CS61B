@@ -24,15 +24,19 @@ public class Planet {
         this.imgFileName = planet.imgFileName;
     }
 
-    public void update(double time, double fX, double fY) {
+    public void update(double dt, double fX, double fY) {
         double dVelX, dVelY;
         // F = a * m, thus a = F / m.
+        // dt = delta time
 
-        dVelX = (fX / this.mass) * time;
-        dVelY = (fY / this.mass) * time;
+        dVelX = (fX / this.mass) * dt;
+        dVelY = (fY / this.mass) * dt;
 
         this.xxVel += dVelX;
         this.yyVel += dVelY;
+
+        this.xxPos += this.xxVel * dt;
+        this.yyPos += this.yyVel * dt;
     }
 
 
