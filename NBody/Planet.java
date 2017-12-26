@@ -108,6 +108,10 @@ public class Planet {
         return netForce.doubleValue();
     }
 
+    public String toString() {
+        return "Name: " + this.imgFileName + " mass: " + this.mass;
+    }
+
     public static void main(String[] args) {
         Planet Saturn = new Planet(2.3e12, 9.5e11, 0, 0, 6.0e26, "");
         Planet Sun = new Planet(1.0e12, 2.0e11, 0, 0, 2.0e30, "");
