@@ -50,6 +50,7 @@ public class NBody {
 	public static void main(String[] args) {
 		Scanner reader = new Scanner(System.in);
 		double T, dt, radius;
+		int t = 0;
 		String filename;
 		Planet[] planets;
 
@@ -58,5 +59,32 @@ public class NBody {
 		filename = args[2].trim();
 		radius = readRadius(filename);
 		planets = readPlanets(filename);
+
+		StdDraw.setScale(-radius, radius);
+		StdDraw.picture(0, 0, "images/starfield.jpg");
+		for (Planet planet : planets) {
+			planet.draw();
+		}
+
+		for (; t < T; t += dt) {
+			double[] xForces = new double[planets.length], yForces = new double[planets.length];
+			
+			for (int i = 0; i < planets.length; i++) {
+				xForces[i] = planets[i].calcNetForceExertedByX(planets);
+				yForces[i] = planets[i].calcNetForceExertedByY(planets);
+			}
+
+			for (int i = 0; i < planets.length; i++) {
+				planets[i].update(dt, xForces[i], yForces[i]);
+			}
+
+			StdDraw.clear();
+			StdDraw.picture(0, 0, "images/starfield.jpg");
+
+			for (Planet planet : planets) {
+				planet.draw();
+			}
+			StdDraw.show(10);
+		}
 	}
 }
