@@ -20,26 +20,28 @@ public class AList {
     }
 
     public void resize() {
-        // The assigned value is only used in the event of the ALIst being reduced in size/
-        int capacity = (int) (this.size*.5) + 1;
+        // The assigned value is only used in the event of the ALIst being reduced in size
         if (this.size == this.data.length) {
-            capacity = this.size*2;
-            int[] largerAList = new int[capacity];
-            System.arraycopy(); @TODO
-        } else if (0.5*this.size >= this.data.length) {
-            int[] smallerAList = new int[capacity];
-            System.arraycopy(this.data, 0, smallerAList, 0, this.size);
+            int[] newArr = new int[this.size*2];
+            System.arraycopy(this.data, 0, newArr, 0, size);
+            this.data = newArr;            
+        } else if ((this.size*0.25) <= this.data.length ) {
+            int[] newArr = new int[(int) (this.size*0.5)+1];
+            System.arraycopy(this.data, 0, newArr, 0, size);
+            this.data = newArr;
         }
     }
 
     public void addLast(int value) {
+        resize();
         this.data[size] = value;
-        this.size++;
-        resize();    
+        this.size++;    
     }
 
     public int removeLast() {
+        resize();
         int last = getLast();
+        size--;
         return last;
     }
 }

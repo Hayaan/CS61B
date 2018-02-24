@@ -1,0 +1,4 @@
+for x = saturn
+dx_squared = Math.pow((xsaturn - xsun), 2)
+dy_squared = Math.pow((ysat - ysun), 2)
+r_squared = dx+dy
