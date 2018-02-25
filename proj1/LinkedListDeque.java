@@ -10,8 +10,18 @@ public class LinkedListDeque<T> {
         }
     }
     
-    private int size = 0;
+    private int size;
     private Node sentinel = new Node(null); 
+
+    public LinkedListDeque() {
+        size = 0;
+    }
+
+    public LinkedListDeque(T item) {
+        size = 0;
+        this.addFirst(item);
+    }
+
 
     /* Prepend item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
     public void addFirst(T item) {
@@ -51,7 +61,7 @@ public class LinkedListDeque<T> {
 
     /* Return true if empty, false if the List contains any items. */
     public boolean isEmpty() {
-        return size == 0;
+        return (this.size == 0);
     }
 
     /* Returns the # of items in the Deque */
@@ -75,6 +85,7 @@ public class LinkedListDeque<T> {
         } else {
             sentinel.next.next.prev = sentinel;
             sentinel.next = sentinel.next.next;
+            size--;
             return item;
         }
     }
@@ -88,6 +99,7 @@ public class LinkedListDeque<T> {
         } else {
             sentinel.prev.prev.next = sentinel;
             sentinel.prev = sentinel.prev.prev;
+            size--;
             return item;
         }
     }
