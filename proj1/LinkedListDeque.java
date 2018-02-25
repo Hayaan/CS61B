@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class LinkedListDeque<T> {
     private class Node {
         private T data;
@@ -23,7 +25,8 @@ public class LinkedListDeque<T> {
     }
 
 
-    /* Prepend item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
+    /* Prepend item to the Linked List, if it's the first. It'll be the 
+    sentinel node's next and previous node. */
     public void addFirst(T item) {
         Node first = new Node(item);
         size++;
@@ -41,7 +44,8 @@ public class LinkedListDeque<T> {
         }
     }
 
-    /* Append item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
+    /* Append item to the Linked List, if it's the first. It'll be the 
+    sentinel node's next and previous node. */
     public void addLast(T item) {
         Node last = new Node(item);
         size++;
@@ -74,6 +78,7 @@ public class LinkedListDeque<T> {
         for (int i = 0; i < size; i++) {
             System.out.print(this.get(i) + " ");
         }
+        System.out.println();
     }
 
     /* Removes and returns the first item in the Linked List */
@@ -106,7 +111,6 @@ public class LinkedListDeque<T> {
 
     /* Get i'th item in the list */
     public T get(int index) {
-        T data;
         Node currentNode = sentinel.next;
         for (int i = 0; i < index; i++) {
             if (currentNode.next == null) {
@@ -114,7 +118,38 @@ public class LinkedListDeque<T> {
             }
             currentNode = currentNode.next;
         }
-        data = currentNode.data;
-        return data;
-    }   
+        return currentNode.data;
+    }
+
+    /* get method that utilises recursion rather than iteration. */
+    public T getRecursive(int index) {
+        Node currentNode = sentinel.next;
+        if (index > 0) {
+            return getRecursive(index-1, currentNode.next);
+        } else {
+            return currentNode.data;
+        }
+    }    
+
+    /* getRecursive overloaded method. Takes so as to not lose track of the already
+    visited node. */
+    public T getRecursive(int index, Node currentNode) {
+        if (index > 0) {
+            return getRecursive(index-1, currentNode.next);
+        } else {
+            return currentNode.data;
+        }
+    }
+
+    public static void main(String[] args) {
+        LinkedListDeque<Integer> test = new LinkedListDeque<>();
+
+        for (int i = 100; i > 0; i--) {
+            test.addFirst(i);
+        }
+        test.printDeque();
+        System.out.println(test.size());
+        System.out.println(test.getRecursive(25));
+        System.out.println(test.get(25));
+    }
 }
