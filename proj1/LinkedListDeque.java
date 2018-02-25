@@ -61,17 +61,35 @@ public class LinkedListDeque<T> {
 
     /* Print deque items. Each item will be seperated by a single space. */
     public void printDeque() {
-
+        for (int i = 0; i < size; i++) {
+            System.out.print(this.get(i) + " ");
+        }
     }
 
     /* Removes and returns the first item in the Linked List */
     public T removeFirst() {
-        return 0;
+        T item = sentinel.next.data;
+
+        if (sentinel.next == null) {
+            return null;
+        } else {
+            sentinel.next.next.prev = sentinel;
+            sentinel.next = sentinel.next.next;
+            return item;
+        }
     }
  
     /* Removes and returns the last item in the Linked List */    
     public T removeLast() {
-        return 0;
+        T item = sentinel.prev.data;
+
+        if (sentinel.prev == null) {
+            return null;
+        } else {
+            sentinel.prev.prev.next = sentinel;
+            sentinel.prev = sentinel.prev.prev;
+            return item;
+        }
     }
 
     /* Get i'th item in the list */
