@@ -94,6 +94,15 @@ public class LinkedListDeque<T> {
 
     /* Get i'th item in the list */
     public T get(int index) {
-        return 0;
+        T data;
+        Node currentNode = sentinel.next;
+        for (int i = 0; i < index; i++) {
+            if (currentNode.next == null) {
+                return null;
+            }
+            currentNode = currentNode.next;
+        }
+        data = currentNode.data;
+        return data;
     }   
 }
