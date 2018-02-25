@@ -33,7 +33,20 @@ public class LinkedListDeque<T> {
 
     /* Append item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
     public void addLast(T item) {
+        Node last = new Node(item);
+        size++;
 
+        if (sentinel.next == null) {
+            last.next = sentinel;
+            last.prev = sentinel;
+            sentinel.next = last;
+            sentinel.prev = last;
+        } else {
+            last.next = sentinel;
+            last.prev = sentinel.prev;
+            sentinel.prev.next = last;
+            sentinel.prev = last;
+        }
     }
 
     /* Return true if empty, false if the List contains any items. */
