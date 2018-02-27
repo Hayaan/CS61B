@@ -1,7 +1,16 @@
 public class ArrayDeque<T> {
-    
-    public ArrayDeque() {
+    private T[] data;
+    private int size, nextFirst = 3, nextLast = 5;
 
+    public ArrayDeque() {
+        data = (T[]) new Object[8];
+        size = 0;
+    }    
+    
+    public ArrayDeque(T item) {
+        data = (T[]) new Object[8];
+        data[5] = item;
+        size = 1;
     }
     
     /* Prepend item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
@@ -45,6 +54,17 @@ public class ArrayDeque<T> {
     }
 
     public static void main(String[] args) {
-
+        ArrayDeque<Integer> test = new ArrayDeque<>();
+        test.printDeque();
+        test.addFirst(2);
+        System.out.println(test.size());
+        
+        Random rand = new java.util.Random();
+        for (int i = 0; i < 10; i++) {
+            test.addFirst(rand.nextInt());
+            test.addLast(rand.nextInt());
+        }
+    
+        System.out.println(test.size());
     }
 }
