@@ -2,14 +2,14 @@ public class ArrayDeque<T> {
     private T[] data;
     private int size, nextFirst, nextLast;
 
-    public ArrayDeque() {
+    ArrayDeque() {
         data = (T[]) new Object[8];
         size = 0;
         nextFirst = 3;
         nextLast = 4;
     }    
     
-    public ArrayDeque(T item) {
+    ArrayDeque(T item) {
         data = (T[]) new Object[8];
         data[4]= item;
         size = 1;
@@ -18,7 +18,7 @@ public class ArrayDeque<T> {
     }
     
     /* Prepend item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
-    public void addFirst(T item) {
+    void addFirst(T item) {
         data[nextFirst] = item;
         size++; nextFirst++;
         if (size == data.length) {
@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
     }
 
     /* Append item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
-    public void addLast(T item) {
+    void addLast(T item) {
         data[nextLast] = item;
         size++; nextLast++;
         if (size == data.length) {
@@ -36,32 +36,36 @@ public class ArrayDeque<T> {
     }
 
     /* Return true if empty, false if the List contains any items. */
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return size == 0;
     }
 
     /* Returns the # of items in the Deque */
-    public int size() {
+    int size() {
         return this.size;
     }
 
-    /* Print deque items. Each item will be seperated by a single space. */
-    public void printDeque() {
+    /* Prints deque items. Each item will be seperated by a single space. */
+    void printDeque() {
 
     }
 
     /* Removes and returns the first item in the Linked List */
-    public T removeFirst() {
+    T removeFirst() {
 
     }
  
     /* Removes and returns the last item in the Linked List */    
-    public T removeLast() {
+    T removeLast() {
 
     }
 
     /* Get i'th item in the list */
-    public T get(int index) {
+    T get(int index) {
+
+    }
+
+    void resize() {
 
     }
 
