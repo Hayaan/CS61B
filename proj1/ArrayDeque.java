@@ -47,7 +47,9 @@ public class ArrayDeque<T> {
 
     /* Prints deque items. Each item will be seperated by a single space. */
     void printDeque() {
-
+        for (T item : data) {
+            System.out.print(item + " ");
+        }
     }
 
     /* Removes and returns the first item in the Linked List */
@@ -68,12 +70,12 @@ public class ArrayDeque<T> {
 
     /* Get i'th item in the list */
     T get(int index) {
-
+        return data[(nextFirst + 1) % data.length];
     }
 
     void resize() {
 
-    }
+    }   
 
     public static void main(String[] args) {
         ArrayDeque<Integer> test = new ArrayDeque<>();
