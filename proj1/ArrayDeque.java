@@ -21,7 +21,7 @@ public class ArrayDeque<T> {
     void addFirst(T item) {
         data[nextFirst] = item;
         size++; nextFirst--;
-        if (size == data.length || size <= 0.25 * data.length) {
+        if (size == data.length || (size <= 0.25 * data.length && data.length > 8)) {
             resize();
         }
     }
@@ -30,7 +30,8 @@ public class ArrayDeque<T> {
     void addLast(T item) {
         data[nextLast] = item;
         size++; nextLast++;
-        if (size == data.length || size <= 0.25 * data.length) {
+        /* Full Array --> double, .25 or less off the array in use --> halved, min size = 8 */
+        if (size == data.length || (size <= 0.25 * data.length && data.length > 8)) {
             resize();
         }
     }
@@ -73,9 +74,18 @@ public class ArrayDeque<T> {
         return data[(nextFirst + 1) % data.length];
     }
 
+    /* Double the size of the array or half it with a minimum size of 8,
+    depending on the usage */
     void resize() {
-
-    }   
+        if (size == data.length) {
+            T[] temp = (T[]) new Object[data.length*2];
+            System.arraycopy(data, nextLast, temp, (temp.length/2) - 1, data.length);
+            data = temp;
+        } else {
+            T[] temp = (T[]) new Object[data.length/2];
+            System.arraycopy(data, nextFirst+1, temp, (temp.length/2) - 1, data.size);
+        }
+    }
 
     public static void main(String[] args) {
         ArrayDeque<Integer> test = new ArrayDeque<>();
