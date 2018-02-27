@@ -20,8 +20,8 @@ public class ArrayDeque<T> {
     /* Prepend item to the Linked List, if it's the first. It'll be the sentinel node's next and previous node. */
     void addFirst(T item) {
         data[nextFirst] = item;
-        size++; nextFirst++;
-        if (size == data.length) {
+        size++; nextFirst--;
+        if (size == data.length || size <= 0.25 * data.length) {
             resize();
         }
     }
@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
     void addLast(T item) {
         data[nextLast] = item;
         size++; nextLast++;
-        if (size == data.length) {
+        if (size == data.length || size <= 0.25 * data.length) {
             resize();
         }
     }
@@ -52,12 +52,18 @@ public class ArrayDeque<T> {
 
     /* Removes and returns the first item in the Linked List */
     T removeFirst() {
-
+        T first = data[nextFirst + 1];
+        data[nextFirst + 1] = null;
+        nextFirst++;
+        return first;
     }
  
     /* Removes and returns the last item in the Linked List */    
     T removeLast() {
-
+        T last = data[nextLast + 1];
+        data[nextLast + 1] = null;
+        nextLast--;
+        return last;
     }
 
     /* Get i'th item in the list */
