@@ -15,6 +15,7 @@ public class ArrayDeque<T> {
         nextFirst--;
         // Make sure nextFirst rolls over to data.length once it becomes
         // smaller than 0.
+        size++;
         if (size == data.length) {
             resize(size * 2);
         } else if (.25*size <= data.length && data.length > 8) {
@@ -27,7 +28,7 @@ public class ArrayDeque<T> {
         /*  Rolls nextLast over to 0 once the index exceeds
             the bounds of the array */
         nextLast = (nextLast + 1) % (data.length - 1);
-
+        size++;
         if (size == data.length) {
             resize(size * 2);
         } else if (.25*size <= data.length && data.length > 8) {
@@ -36,6 +37,19 @@ public class ArrayDeque<T> {
     }
 
     public void resize(int capacity) {
+        T[] temp = (T[]) new Object[capacity];
 
+        if (capacity > data.length) {
+            for (int i = 0; i < capacity; i++) {
+                temp[i] = data[(nextLast + i) % data.length];
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                temp[i] = data[nextFirst + i + 1];
+            }
+        }
+        nextFirst = temp.length; 
+        nextLast = size;
+        data = temp;
     }
 }
