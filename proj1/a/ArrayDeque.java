@@ -1,3 +1,5 @@
+//TODO  add resize method
+
 public class ArrayDeque<T> {
     private T[] data;
     private int size, nextFirst, nextLast;
