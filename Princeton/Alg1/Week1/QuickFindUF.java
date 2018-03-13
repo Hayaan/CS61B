@@ -19,7 +19,7 @@ public class QuickFindUF {
 
     // Add connection between p and q, by changing any id values
     // in p's component to q's component values
-    public void union (int p, int q) {
+    public void union(int p, int q) {
         int pid = id[p];
         int qid = id[q];
         for (int i = 0; i < id.length; i++) {
