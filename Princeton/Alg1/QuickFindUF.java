@@ -1,8 +1,10 @@
 public class QuickFindUF {
     private int[] id;
+    private int count;
 
     public QuickFindUF(int n) {
         id = new int[n];
+        count = n;
 
         for (int i = 0; i < n; i++) {
             id[i] = i;
@@ -18,24 +20,24 @@ public class QuickFindUF {
     // Add connection between p and q, by changing any id values
     // in p's component to q's component values
     public void union (int p, int q) {
+        int pid = id[p];
+        int qid = id[q];
         for (int i = 0; i < id.length; i++) {
-            // Changing p's value during the iteration would 
-            // botch subsequent changes, thus i != p must also be true
-            if (id[i] == id[p] && i != p) {
-                id[i] = id[q];
+            if (id[i] == pid) {
+                id[i] = qid;
             }
         }
-        id[p] = id[q];
+        // 2 components --> 1 merged component after the union
+        count--;
     }
 
+    // Component identifier for p = {0, 1, 2, ..., n-2, n-1}
     public int find(int p) {
-        
-        return 0;
+        return id[p];
     }
 
     public int count() {
-
-        return 0;
+        return count;
     }
 
 }
