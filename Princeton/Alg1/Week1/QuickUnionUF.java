@@ -28,10 +28,12 @@ public class QuickUnionUF {
         return pRoot == qRoot;
     }
 
-    // Add connection between p and q, by making p the root of q.
-    // id[q] = p
+    // Add connection between p and q, by making the root of p the root of q's root.
+    // id[root of q] = root of p
     public void union(int p, int q) {
-        id [q] = p;
+        int pRoot = findRoot(p);
+        int qRoot = findRoot(q);
+        id [qRoot] = pRoot;
         count--;
     }
 
