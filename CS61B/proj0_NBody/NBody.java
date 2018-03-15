@@ -50,7 +50,6 @@ public class NBody {
 	public static void main(String[] args) {
 		Scanner reader = new Scanner(System.in);
 		double T, dt, radius;
-		int t = 0;
 		String filename;
 		Planet[] planets;
 
@@ -66,7 +65,7 @@ public class NBody {
 			planet.draw();
 		}
 
-		for (; t < T; t += dt) {
+		for (int t= 0; t < T; t += dt) {
 			double[] xForces = new double[planets.length], yForces = new double[planets.length];
 			
 			for (int i = 0; i < planets.length; i++) {
