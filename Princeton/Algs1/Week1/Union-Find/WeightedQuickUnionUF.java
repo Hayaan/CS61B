@@ -21,11 +21,10 @@ public class WeightedQuickUnionUF {
     // Helper method of connected & findRoot. Recursively travels up the tree to the root node.
     // Returns the root node's value for eventual comparison.
     public int findRoot(int p) {
-        if (id[p] == p) {
-            return p;
-        } else {
-            return findRoot(id[p]);
+        while (id[p] != p) {
+            p = id[p];
         }
+        return p;
     }
 
     // Compares the root nodes of both nodes to see whether or not they're connected
