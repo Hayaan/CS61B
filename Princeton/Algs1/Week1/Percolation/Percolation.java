@@ -37,36 +37,20 @@ public class Percolation {
             sites[row - 1][col - 1] = true;
             openSites++;
             int index = (row - 1) * n + (col - 1);
+            // System.out.println("Row: " + row + "; Col: " + col + "\nIndex: " + index);
             // If the site is in the leftmost column, we won't be checking any sites to the left of it
-            if (index % n == 0) {
-                // Connect right side, if it isn't already connected
-                uf.union(index, index + 1);
-                // If not in top row and top isn't connect, connect top and indexed
-                if (!(row == 1)) {
-                    uf.union(index, index - n);
-                // If not in bottom row and bottom isn't connected, connect bottom and indexed
-                } else if (!(row == n)) {
-                    uf.union(index, index + n);
-                } else {
-                    //connect both
-                    uf.union(index, index - n);
-                    uf.union(index, index + n);
-                }
-            } else if (index % n == n - 1) {
-                // Connect left side, if it isn't already connected
-                    uf.union(index, index - 1);
-                if (!(row == 1)) {
-                    uf.union(index, index + n);
-                } else if (!(row == n)) {
-                    uf.union(index, index + n);
-                } else {
-                    uf.union(index, index - n);
-                    uf.union(index, index + n);
-                }
-            } else {
+            if (!(index % n == 0)) {
+                // Connect right side if not in rightmost row
                 uf.union(index, index - 1);
-                uf.union(index, index - n);
+            } else if (!(index % n == n - 1)) {
+            // Connect left side if not in leftmost row
                 uf.union(index, index + 1);
+            }
+            // If not in the top row, connect to top
+            if (!(row == 1)) {
+                uf.union(index, index - n);
+            } else if (!(row == n)) {
+            // If not in the bottom row, connect to bottom.
                 uf.union(index, index + n);
             }
         }
@@ -112,8 +96,11 @@ public class Percolation {
         }
         StdOut.println(perc.numberOfOpenSites());
         StdOut.println(perc.percolates());
+        perc.open(5, 5);
 
         Percolation newPerc = new Percolation(1);
+        StdOut.println(newPerc.percolates());
+        newPerc.open(1, 1);
         StdOut.println(newPerc.percolates());
     }
 }
