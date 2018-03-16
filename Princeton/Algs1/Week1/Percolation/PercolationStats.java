@@ -1,43 +1,69 @@
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
-    private double[] thresholdValues;
+    private double[] pValues; // pValues.length = T/trials
 
-    public PercolationStats(int n, int trials) {
-        int counter = 0;
-        thresholdValues = new double[trials];
+    public PercolationStats(int n, int trials) throws IllegalArgumentException {
+        if (n < 1 || trials < 1) {
+            throw new IllegalArgumentException(
+                    "Size of grid or # of trials input was too small.");
+        }
+        pValues = new double[trials];
         for (int i = 0; i < trials; i++) {
             Percolation perc = new Percolation(n);
             while (!perc.percolates()) {
             // Open at random site [a, b)
-                perc.open(StdRandom.uniform(1, n + 1), StdRandom.uniform(1, n + 1));
-                counter++;
+                int randomRow = StdRandom.uniform(1, n + 1);
+                int randomCol = StdRandom.uniform(1, n + 1);
+                perc.open(randomRow, randomCol);
             }
-            thresholdValues[i] = (double) perc.numberOfOpenSites() / (n * n);
-            StdOut.println(thresholdValues[i]);
+            pValues[i] = (double) perc.numberOfOpenSites() / (n * n);
+            StdOut.println((double) perc.numberOfOpenSites() / (n * n));
         }
     }
 
-    // public double mean() {
+    public double mean() {
+        double sum = 0;
+        for (double val : pValues) {
+            sum += val;
+        }
+        return sum/pValues.length;
+        // return StdStats.mean(pValues);
+    }
 
-    // }
+    public double stddev() {
+        double resSum = 0;
+        double mean = this.mean();
+        for (double val : pValues) {
+            resSum += Math.pow((val - mean), 2);
+        }
+        return Math.sqrt(resSum / (pValues.length - 1));
+        // return StdStats.stddev(pValues);
+    }
 
-    // public double stddev() {
+    public double confidenceLo() {
+        double mean = this.mean();
+        double stddev = this.stddev();
+        return mean - (1.96 * stddev / (Math.sqrt(pValues.length)));
+    }
 
-    // }
-
-    // public double confidenceLo() {
-
-    // }
-
-    // public double confidenceHi() {
-
-    // }
+    public double confidenceHi() {
+        double mean = this.mean();
+        double stddev = this.stddev();
+        return mean + (1.96 * stddev / (Math.sqrt(pValues.length)));
+    }
 
     public static void main(String[] args) {
+        // int n = Integer.parseInt(args[0]);
+        // int T = Integer.parseInt(args[1]);
+        // PercolationStats percStat = new PercolationStats(n, T);
+        // StdOut.println("mean \t\t\t = " + percStat.mean());
+        // StdOut.println("stddev \t\t\t = " + percStat.stddev());
+        // StdOut.println("95% confidence interval  = [" +  percStat.confidenceLo() 
+        // + ", " + percStat.confidenceHi() + "]");
         PercolationStats percStat = new PercolationStats(20, 1000);
+        
     }
 }
