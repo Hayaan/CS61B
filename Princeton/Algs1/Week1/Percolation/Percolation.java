@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdIn;
 
 public class Percolation {
     private boolean[][] open;
@@ -11,7 +10,7 @@ public class Percolation {
     private WeightedQuickUnionUF uf;
     private WeightedQuickUnionUF full;
 
-    public Percolation(int n) throws IllegalArgumentException {
+    public Percolation(int n) {
         if (n < 1) {
             throw new IllegalArgumentException("Input for the size of the grid is too small.");
         }
@@ -36,7 +35,7 @@ public class Percolation {
         return (row - 1) * n + col;
     }
 
-    public void open(int row, int col) throws IllegalArgumentException {
+    public void open(int row, int col) {
         if ((row < 1) || (row > n) || (col < 1) || (col > n)) {
             throw new IllegalArgumentException("One of your indices was out of bounds.");
         }
@@ -44,7 +43,7 @@ public class Percolation {
             int index = index(row, col);
             // Open site in boolean arr and increment the # of open sites
             open[(row - 1)][(col - 1)] = true;
-            openSites ++;
+            openSites++;
             // If in top row, connect to the virtual top site in both UFs
             if (row == 1) {
                 uf.union(index, vTop);
@@ -76,14 +75,14 @@ public class Percolation {
         }
     }
 
-    public boolean isOpen(int row, int col) throws IllegalArgumentException {
+    public boolean isOpen(int row, int col) {
         if (row < 1 || row > n || col < 1 || col > n) {
             throw new IllegalArgumentException("One of your indices was out of bounds.");
         }
         return open[row - 1][col - 1];
     }
 
-    public boolean isFull(int row, int col) throws IllegalArgumentException {
+    public boolean isFull(int row, int col) {
         if ((row < 1) || (row > n) || (col < 1) || (col > n)) {
             throw new IllegalArgumentException("One of your indices was out of bounds.");
         } else if (n == 1) {
