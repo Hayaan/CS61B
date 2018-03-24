@@ -1,9 +1,9 @@
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdIn;
 
-public class Stack {
-    int size;
-    Node head;
+public class LinkedListStack {
+    private int size;
+    private Node head;
 
     public Stack() {
         size = 0;
