@@ -1,137 +1,99 @@
+import java.lang.reflect.GenericArrayType;
+import java.lang.UnsupportedOperationException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import edu.princeton.cs.algs4.StdOut;
+
 import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
-/* 
-    Performance requirements.
-    Your deque implementation must support each deque operation (including construction)
-    in constant worst-case time. A deque containing n items must use at most
-    48n + 192 bytes of memory and use space proportional to the number of items currently
-    in the deque. Additionally, your iterator implementation must support each operation
-    (including construction) in constant worst-case time.
-*/
+public class Deque<Item> implements Iterable<Item> {
+    private class Node {
+        public Item val;
+        public Node next, prev;
+        public Node (Item val) { this.val = val; }
+        public Node(Item val, Node next, Node prev) {
+            this.val = val;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
 
-public class Deque<Item>
-// implements Iterator<Item> 
-{
-    private int size = 0;
-    private Item[] arr;
-    private int headIndex = 4;
-    private int tailIndex = 3;
+    private int size;
+    private Node sentinel;
 
-    public Deque() { arr = (Item[]) new Object[8]; }
+    public Deque() {
+        sentinel = new Node(null);
+        size = 0;
+    }
 
     public boolean isEmpty() { return size == 0; }
 
     public int size() { return size; }
 
-    public void addFirst(Item item) {
-        if (item == null) { throw new IllegalAccessError("Invalid argument."); }
-        arr[headIndex] = item;
-        updateHead(true);
+    public void addFirst(Item val) {
+        if (val == null) { throw new IllegalArgumentException(); }
+        Node newFirst;
+        if (isEmpty()) {
+            newFirst = new Node(val, sentinel, sentinel);
+            sentinel.next = newFirst;
+            sentinel.prev = newFirst;
+        } else {
+            newFirst = new Node(val, sentinel.next, sentinel);
+            sentinel.next.prev = newFirst;
+            sentinel.next = newFirst;
+        }
         size++;
     }
 
-    public void addLast(Item item) {
-        if (item == null) { throw new IllegalAccessError("Invalid argument."); }
-        arr[tailIndex] = item;
-        updateTail(true);
+    public void addLast(Item val) {
+        if (val == null) { throw new IllegalArgumentException(); }
+        Node newLast;
+        if (isEmpty()) {
+            newLast = new Node(val, sentinel, sentinel);
+            sentinel.next = newLast;
+            sentinel.prev = newLast;
+        } else {
+            newLast = new Node(val, sentinel, sentinel.prev);
+            sentinel.prev.next = newLast;
+            sentinel.prev = newLast;
+        }
         size++;
     }
 
     public Item removeFirst() {
-        if (arr[headIndex - 1] == null) { throw new NoSuchElementException("Deque is empty"); }
-        updateHead(false);
-        Item oldFirst = arr[headIndex];
-        arr[headIndex] = null;
+        if (isEmpty()) { throw new NoSuchElementException(); }
+        Item oldFirst = sentinel.next.val;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
         size--;
         return oldFirst;
     }
 
     public Item removeLast() {
-        if (arr[tailIndex + 1] == null) { throw new NoSuchElementException("Deque is empty"); }
-        updateTail(false);
-        Item oldLast = arr[tailIndex];
-        arr[tailIndex] = null;  
+        if (isEmpty()) { throw new NoSuchElementException(); }
+        Item oldLast = sentinel.prev.val;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
         size--;
         return oldLast;
     }
 
-    public void printQueue() {
-        StdOut.println(Arrays.toString(arr));
-        int currentIndex = headIndex;
-        StdOut.println("Head: " + headIndex + "\tTail: " + tailIndex);
+    @Override
+    public Iterator<Item> iterator() { return new DequeIterator(); }
+
+    private class DequeIterator implements Iterator<Item> {
+        private Node current = sentinel.next;
         
-        if (headIndex > tailIndex) {
-            while (currentIndex-- != tailIndex + 1) {
-                StdOut.println("Value: " + this.arr[currentIndex] + "\tIndex: " + currentIndex);
-            }
-        } else {
-            while (currentIndex != tailIndex + 1) {
-                currentIndex = (currentIndex == 0) ? arr.length - 1 : currentIndex - 1;
-                StdOut.println("Value: " + this.arr[currentIndex] + "\tIndex: " + currentIndex);
-            }
+        @Override
+        public boolean hasNext() { return current != sentinel && current != null; }
+
+        @Override
+        public Item next() {
+            if (!hasNext()) { throw new NoSuchElementException(); }
+            Item val = current.val;
+            current = current.next;
+            return val;
         }
-    }
-
-    // public class Iterator<Item> extends Iterator<Item> {
-    //     private int i = headIndex;
-
-    //     public boolean hasNext() {
-    //         return i >= tailIndex;
-    //     }
-
-    //     public Item next() {
-    //         return arr[i--];
-    //     }
-    // }
-
-    private void updateHead(boolean isIncreasing) {
-        if (isIncreasing) {
-            headIndex = (headIndex == arr.length - 1) ? 0 : headIndex + 1;
-        } else {
-            headIndex = (headIndex == 0) ? arr.length - 1 : headIndex - 1;
-        }
-    }
-
-    private void updateTail(boolean isIncreasing) {
-        if (isIncreasing) {
-            tailIndex = (tailIndex == 0) ? arr.length - Math.abs(tailIndex) : tailIndex - 1;
-        } else {
-            tailIndex = (tailIndex == arr.length - 1) ? 0 : tailIndex + 1;
-        }
-    }
-
-    public static void main(String[] args) {
-        //UNIT TESTING
-        Deque<Integer> headBelowTail = new Deque<>();
-        headBelowTail.printQueue();
-        headBelowTail.addFirst(5);
-        headBelowTail.printQueue();
-        headBelowTail.addFirst(2);
-        headBelowTail.addFirst(1);
-        headBelowTail.printQueue();
-        headBelowTail.addFirst(9);
-        headBelowTail.printQueue();
-
-        // StdOut.println("Removed head: " + headBelowTail.removeFirst());
-        // StdOut.println("Removed tail: " + headBelowTail.removeLast());
-        // headBelowTail.addFirst(4);
-        // headBelowTail.addFirst(6);
-        // headBelowTail.printQueue();
-
-        // StdOut.println();
-
-        // Deque<Integer> tailBelowHead = new Deque<>();
-        // tailBelowHead.addLast(2);
-        // tailBelowHead.addFirst(5);
-        // tailBelowHead.addLast(0);
-        // tailBelowHead.addFirst(5);
-        // tailBelowHead.printQueue();
-        // StdOut.println("Removed head: " + tailBelowHead.removeFirst());
-        // StdOut.println("Removed tail: " + tailBelowHead.removeLast());
-        // tailBelowHead.printQueue();
     }
 }
