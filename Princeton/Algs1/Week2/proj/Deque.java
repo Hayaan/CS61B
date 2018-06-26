@@ -1,11 +1,5 @@
-import java.lang.reflect.GenericArrayType;
-import java.lang.UnsupportedOperationException;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 
 public class Deque<Item> implements Iterable<Item> {
     private class Node {
