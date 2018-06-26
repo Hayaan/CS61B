@@ -1,4 +1,4 @@
-public class ArrayQueue <T> {
+public class ArrayQueue<T> {
     private int size;
     private T[] data;
 

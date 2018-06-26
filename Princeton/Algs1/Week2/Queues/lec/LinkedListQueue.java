@@ -1,4 +1,6 @@
-public class LinkedListQueue <T> {
+import java.util.LinkedList;
+
+public class LinkedListQueue<T> {
     private Node<T> first, last;
     private int size;
 
