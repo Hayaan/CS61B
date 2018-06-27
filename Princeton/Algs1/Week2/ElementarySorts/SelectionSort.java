@@ -9,12 +9,12 @@ public class SelectionSort {
     }
 
     private static boolean isLess(Comparable a, Comparable b) {
-        return a.compareTo(b) <= 0;
+        return a.compareTo(b) == -1;
     }
 
-    private static boolean isSorted(Comparable[] arr) {
+    public static boolean isSorted(Comparable[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
-            if (!isLess(arr[i], arr[i + 1])) { return false; }
+            if (arr[i].compareTo(arr[i + 1]) == 1) { return false; }
         }
         return true;
     }
