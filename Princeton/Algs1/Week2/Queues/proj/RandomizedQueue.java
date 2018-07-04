@@ -7,10 +7,13 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-    private int size = 0;
-    private Item[] arr = (Item[]) new Object[8];
+    private int size;
+    private Item[] arr;
 
-    public RandomizedQueue() {}
+    public RandomizedQueue() {
+        size = 0;
+        arr = (Item[]) new Object[8];
+    }
 
     public boolean isEmpty() { return size == 0; }
 
@@ -26,8 +29,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) { throw new NoSuchElementException("Deque is empty"); }
         int i = generateRandomIndex(size);
         Item val = arr[i];
-        arr[i] = null;
-        size--;
+        arr[i] = arr[--size];
+        arr[size] = null;
         if (size <= 0.25 * arr.length && arr.length != 8) { resize(0.25f); }
         return val;
     }
